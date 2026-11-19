@@ -1,0 +1,15 @@
+{
+  "name": "mascots",
+  "icon": "icon.png",
+  "description": "A mascot in the sidebar header, next to the search, with almost 5000 characters to choose from in Settings → Mascots. Pictures load from petdex.dev, the choice is kept in the browser.",
+  "why": "The hub header comes alive",
+  "version": "1.3.4",
+  "hub": "^1.5",
+  "web": "main.js",
+  "i18n": {
+    "ru": {
+      "description": "Маскот в шапке боковой панели, рядом с поиском, на выбор почти 5000 персонажей в «Настройки» → «Маскоты». Картинки грузятся с petdex.dev, выбор хранится в браузере.",
+      "why": "Шапка хаба оживает"
+    }
+  }
+}

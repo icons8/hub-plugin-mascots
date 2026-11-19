@@ -1,0 +1,64 @@
+/* "Mascots": the mascot in the sidebar header and the gallery in Settings. Page tokens, no colors of its own. */
+.pet { position: relative; overflow: hidden; flex: none; line-height: 0; }
+.pet img { display: block; width: 600%; height: 100%; max-width: none; transform: translateX(0); user-select: none; -webkit-user-drag: none; }
+.pet-head { width: 37px; height: 40px; margin: -4px 0; cursor: pointer; }
+/* Clean: as tall as the neighbouring buttons of the header (the theme's --ctl-h), the sprite keeps its 37:40 shape */
+html.th-clean .pet-head { width: calc(var(--ctl-h, 40px) * 37 / 40); height: var(--ctl-h, 40px); margin: 0; }
+/* Clean: the mascot is a 36 px button in the left corner of the header row, the search moves right of it (the slot host goes first;
+   gap 0: an empty slot of another plugin would add 8 px before the mascot). The slot is the button: tabindex and role are set in main.js.
+   The cloud of the mascot plugin (shown while no pet is picked) takes the same corner and the same box; it is not a button, so no hover */
+html.th-clean .search-row #slot-sidebar-header { order: -1; gap: 0; }
+html.th-clean #slot-sidebar-header .slot[data-plugin="eugenius-s:mascots"]:not(:empty),
+html.th-clean #slot-sidebar-header .slot[data-plugin="kalimullin:mascot"] { width: 36px; height: 36px; display: grid; place-items: center; margin: 0; }
+html.th-clean #slot-sidebar-header .slot[data-plugin="eugenius-s:mascots"]:not(:empty) { border-radius: 8px; cursor: pointer; }
+html.th-clean #slot-sidebar-header .slot[data-plugin="eugenius-s:mascots"]:not(:empty):hover { background: var(--c-hover); }
+html.th-clean #slot-sidebar-header .slot[data-plugin="eugenius-s:mascots"]:focus-visible { outline: 2px solid var(--c-ring); outline-offset: 2px; }
+/* instead of the avatar: on the Settings button only the mascot, the same size as right of the title;
+   no backing circle, no account icon, no connection light */
+.pet-avatar { width: 37px; height: 40px; margin: -2px 0; pointer-events: none; }
+body.pet-as-avatar #conn { width: auto; height: auto; background: transparent; border-radius: 0; }
+body.pet-as-avatar #conn:hover, body.pet-as-avatar #conn[aria-current="true"] { background: transparent; }
+body.pet-as-avatar #conn > .icon, body.pet-as-avatar #conn > .dot { display: none; }
+.pets-opt { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; font-size: var(--text-sm); color: var(--foreground); cursor: pointer; }
+.pets-opt + button { margin-left: 0; }
+/* our own mascot instead of the cloud of the mascot plugin: never two at once */
+body.has-pet .mascot.in-header { display: none; }
+
+.pets { display: grid; gap: var(--space-3); max-width: 960px; }
+.pets-now { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); background: var(--card); }
+.pets-now .pet { width: 74px; height: 80px; }
+.pets-now b { display: block; font-weight: 600; }
+.pets-now span { color: var(--muted-foreground); font-size: var(--text-xs); }
+.pets-now button { margin-left: auto; }
+.pets-bar { display: flex; align-items: center; gap: var(--space-3); flex-wrap: wrap; }
+.pets-q { min-width: 240px; flex: 1; padding: 6px 10px; border: 1px solid var(--border); border-radius: var(--radius);
+  background: var(--card); color: var(--foreground); font: inherit; }
+.pets-count, .pets-note { color: var(--muted-foreground); font-size: var(--text-xs); margin: 0; }
+.pets-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(132px, 1fr)); gap: var(--space-2); }
+.pets-card { display: grid; justify-items: center; gap: 4px; padding: var(--space-2); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); background: var(--card); color: var(--foreground); font: inherit; cursor: pointer; text-align: center; }
+.pets-card:hover { border-color: var(--input); background: var(--muted); }
+.pets-card[aria-pressed="true"] { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary) inset; }
+.pets-card .pet { width: 96px; height: 104px; }
+.pets-cloud { display: grid; place-items: center; width: 96px; height: 104px; font-size: 56px; line-height: 1; color: var(--muted-foreground); }
+.pets-cloud img { width: 72px; height: 72px; }
+.pets-name { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: var(--text-sm); }
+.pets-more { justify-self: center; }
+
+/* filters are like on petdex.dev: a row = a label + chips with counters */
+.pets-filters { display: grid; gap: var(--space-2); padding: var(--space-3); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--card); }
+.pets-frow { display: grid; grid-template-columns: 72px 1fr; align-items: start; gap: var(--space-2); }
+.pets-flabel { padding-top: 5px; font-family: var(--font-code, monospace); font-size: var(--text-xs); letter-spacing: .12em; text-transform: uppercase; color: var(--muted-foreground); }
+.pets-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.pets-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border: 1px solid var(--border); border-radius: 9999px; background: var(--card); color: var(--foreground); font: inherit; font-size: var(--text-sm); cursor: pointer; }
+.pets-chip small { color: var(--muted-foreground); font-family: var(--font-code, monospace); font-size: var(--text-xs); }
+.pets-chip:hover { border-color: var(--input); background: var(--muted); }
+.pets-chip[aria-pressed="true"] { border-color: var(--primary); background: color-mix(in srgb, var(--primary) 10%, var(--card)); }
+.pets-chip.more { border-color: transparent; background: transparent; color: var(--muted-foreground); }
+.pets-dot { width: 7px; height: 7px; border-radius: 50%; flex: none; }
+.pets-reset { justify-self: start; }
+
+/* Clean (html.th-clean): the chosen pet and the chosen chip are marked by a neutral line and fill of the theme, not the blue accent */
+html.th-clean .pets-card[aria-pressed="true"] { border-color: var(--c-line-strong); box-shadow: 0 0 0 1px var(--c-line-strong) inset; }
+html.th-clean .pets-chip[aria-pressed="true"] { border-color: var(--c-line-strong); background: var(--c-fill); }
